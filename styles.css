@@ -44,3 +44,6 @@ button:active {
     box-shadow 100ms,
     color 100ms;
 }
+body {
+  background-color: #ecbbbb;
+}
