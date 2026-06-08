@@ -1,49 +1,237 @@
-/* From Uiverse.io by Kabak */
-button {
-  height: 50px;
-  width: 120px;
-  margin: 5px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  cursor: pointer;
-  font-family: Consolas, "Courier New", monospace;
-  font-size: 16px;
-  color: rgb(161, 161, 161);
-
-  border: 1px solid #404c5d;
-  border-radius: 5px;
-
-  background: linear-gradient(145deg, #2e2d2d, #212121);
-  box-shadow:
-    -1px -5px 15px #41465b,
-    5px 5px 15px #41465b,
-    inset 5px 5px 10px #212121,
-    inset -5px -5px 10px #212121;
-
-  transition:
-    box-shadow 500ms,
-    color 500ms;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-button:hover {
-  color: #d6d6d6;
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #16161a;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+  padding: 24px;
+}
+
+.accordion-card {
+  width: min(1400px, 95vw);
+  height: 460px;
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #2d2d2d;
+  border-radius: 18px;
+  background: #212121;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+.slide {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 90, 145, 0.75);
+  background-color: #212121;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition:
+    flex 0.45s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.82),
+      rgba(0, 0, 0, 0.24) 46%,
+      rgba(0, 0, 0, 0.08)
+    ),
+    radial-gradient(
+      circle at 75% 70%,
+      rgba(250, 181, 112, 0.22),
+      transparent 45%
+    );
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
+
+.slide::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.02)
+  );
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.slide:hover {
+  flex: 3.2;
+  border-color: rgba(255, 255, 255, 0.28);
   box-shadow:
+    0 0 30px rgba(255, 187, 118, 0.16),
+    0 18px 40px rgba(0, 0, 0, 0.38);
+}
+
+.slide:hover::after {
+  opacity: 1;
+}
+
+.slide-label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  min-width: 16em;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: #ff7aa8;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  transition:
+    opacity 0.2s ease,
+    transform 0.35s ease;
+  z-index: 2;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.55);
+}
+
+.slide:hover .slide-label {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(-90deg) scale(0.96);
+  pointer-events: none;
+}
+
+.kabak-btn {
+  position: absolute;
+  bottom: 24px;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  min-width: 120px;
+  height: 44px;
+  padding: 0 18px;
+  border: 1px solid #3d4654;
+  border-radius: 8px;
+  background: linear-gradient(145deg, #2d2d2d, #1f1f1f);
+  color: #bfc6d1;
+  font-size: 14px;
+  font-family: Consolas, "Courier New", monospace;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  box-shadow:
+    -1px -4px 10px rgba(39, 42, 54, 0.9),
+    4px 4px 12px rgba(10, 10, 10, 0.9),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.05),
+    inset -2px -2px 6px rgba(0, 0, 0, 0.4);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.slide:hover .kabak-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.kabak-btn:hover {
+  color: #f2f4f8;
+  border-color: #586274;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.03),
     1px 1px 13px #20232e,
     -1px -1px 13px #545b78;
 }
 
-button:active {
-  color: #d6d6d6;
+.kabak-btn:active {
+  transform: translateY(1px);
   box-shadow:
-    1px 1px 13px #20232e,
-    -1px -1px 33px #545b78;
-  transition:
-    box-shadow 100ms,
-    color 100ms;
+    inset 1px 1px 4px rgba(0, 0, 0, 0.35),
+    1px 1px 10px #20232e,
+    -1px -1px 10px #545b78;
 }
-body {
-  background-color: #ecbbbb;
+
+.slide-jaguar {
+  background-image: url("Jaguar_Type_00_Front.jpg");
+}
+
+.slide-lancia {
+  background-image: url("Lancia_Stratos_Zero_-7522598642.jpg");
+}
+
+.slide-porsche {
+  background-image: url("Porsche_918_Spyder_IAA_2013.jpg");
+}
+
+.slide-aston {
+  background-image: url("AstonMartinAtom.jpg");
+}
+
+.slide-bmw {
+  background-image: url("BMW_Gina_Museum.jpg");
+}
+
+@media (max-width: 1200px) {
+  .accordion-card {
+    height: 420px;
+    gap: 10px;
+  }
+
+  .slide:hover {
+    flex: 2.8;
+  }
+}
+
+@media (max-width: 900px) {
+  .accordion-card {
+    width: min(96vw, 760px);
+    height: 360px;
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .slide-label {
+    min-width: 13em;
+    font-size: 0.85rem;
+  }
+
+  .kabak-btn {
+    min-width: 108px;
+    height: 40px;
+    font-size: 13px;
+    bottom: 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .accordion-card {
+    height: 300px;
+  }
+
+  .slide:hover {
+    flex: 2.4;
+  }
 }
